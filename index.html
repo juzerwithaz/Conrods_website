@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CONRODS — Dirt * Guts * Glory</title>
+    <meta name="theme-color" content="#E8590C">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Lenis CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.45/dist/lenis.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="custom-cursor">
+        <div class="cursor-crosshair"></div>
+        <div class="cursor-text">SPONSOR</div>
+    </div>
+    
+    <div id="top-loading-bar"></div>
+
+    <!-- BOOT SEQUENCE -->
+    <div id="loader">
+        <div class="rev-gauge">
+            <svg viewBox="0 0 100 50" class="gauge-arc">
+                <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#222" stroke-width="4"/>
+                <path class="gauge-fill" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#E8590C" stroke-width="4" stroke-dasharray="125.6" stroke-dashoffset="125.6"/>
+            </svg>
+            <div class="gauge-needle"></div>
+            <button id="toggle-sound" class="sound-btn">SOUND: ON</button>
+        </div>
+        <div class="terminal-text" id="boot-text"></div>
+        <div class="wipe-overlay"></div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header id="hero" class="section-dark">
+        <div class="hero-bg">
+            <div class="atv-animation-container">
+                <svg class="atv-silhouette" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40,70 L20,70 L30,40 L60,40 L70,30 L110,30 L130,50 L160,50 L170,70 L150,70 C150,80 130,80 130,70 L90,70 C90,80 70,80 70,70 L40,70 Z" fill="#161616"/>
+                    <circle cx="50" cy="70" r="15" fill="#0D0D0D" stroke="#222" stroke-width="4"/>
+                    <circle cx="140" cy="70" r="15" fill="#0D0D0D" stroke="#222" stroke-width="4"/>
+                </svg>
+                <div class="dust-particles"></div>
+            </div>
+            <div class="hud-element">
+                <span class="hud-label">IDLE RPM</span>
+                <span class="hud-value">1200</span>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="line-1">THE</span>
+                <span class="line-2">CONRODS</span>
+            </h1>
+        </div>
+        
+        <div class="ticker-tape">
+            <div class="ticker-content">
+                DIRT * GUTS * GLORY &middot; BAJA SAE INDIA &middot; SRM UNIVERSITY CHENNAI &middot; NATIONAL CHAMPIONS 2012 &middot; FMAE OVERALL CHAMPIONS 2019 &middot; BACK FROM SILENCE &middot; 2025–26 SEASON LIVE &rarr; DIRT * GUTS * GLORY &middot; BAJA SAE INDIA &middot; SRM UNIVERSITY CHENNAI &middot; NATIONAL CHAMPIONS 2012 &middot; FMAE OVERALL CHAMPIONS 2019 &middot; BACK FROM SILENCE &middot; 2025–26 SEASON LIVE &rarr;
+            </div>
+        </div>
+    </header>
+
+    <!-- ABOUT: THE MACHINE -->
+    <section id="about" class="section-dark">
+        <div class="container split-layout">
+            <div class="col-left wireframe-container">
+                <svg class="blueprint-atv" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="blueprint-line" d="M80,140 L40,140 L60,80 L120,80 L140,60 L220,60 L260,100 L320,100 L340,140 L300,140" fill="none" stroke="#F0EDE6" stroke-width="2"/>
+                    <circle class="blueprint-line" cx="100" cy="140" r="30" fill="none" stroke="#E8590C" stroke-width="2"/>
+                    <circle class="blueprint-line" cx="280" cy="140" r="30" fill="none" stroke="#E8590C" stroke-width="2"/>
+                    <path class="blueprint-line" d="M120,80 L220,80 M140,60 L140,40 M200,60 L200,40" fill="none" stroke="#F0EDE6" stroke-width="1" stroke-dasharray="4,4"/>
+                </svg>
+            </div>
+            <div class="col-right">
+                <h2 class="section-title">THE MACHINE</h2>
+                <div class="radio-text" id="about-text">
+                    <p>SYSTEM REBOOT INITIATED.</p>
+                    <p>4 YEARS OF SILENCE BROKEN.</p>
+                    <p>SRM UNIVERSITY'S LEGENDARY OFF-ROAD RACING TEAM RETURNS TO THE DIRT.</p>
+                    <p>WE DON'T JUST BUILD CARS. WE FORGE WEAPONS FOR THE TRACK.</p>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-pill"><span class="stat-num" data-target="15">0</span>+ <span class="stat-label">YEARS LEGACY</span></div>
+                    <div class="stat-pill"><span class="stat-num" data-target="10">0</span>+ <span class="stat-label">NATIONAL TROPHIES</span></div>
+                    <div class="stat-pill"><span class="stat-num" data-target="30">0</span>+ <span class="stat-label">MEMBER TEAM</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER -->
+    <div class="flag-divider"></div>
+
+    <!-- ABOUT BAJA: THE RACE -->
+    <section id="baja" class="section-dark topographic-bg">
+        <div class="container split-layout">
+            <div class="col-left flex-center">
+                <h2 class="massive-text">BAJA</h2>
+            </div>
+            <div class="col-right flex-center">
+                <div class="rotating-facts">
+                    <div class="fact-card active">Conceptualize &rarr; Design &rarr; Build &rarr; Test &rarr; Race</div>
+                    <div class="fact-card">FMAE & SAEINDIA certified</div>
+                    <div class="fact-card">One of the world's toughest collegiate engineering events</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS: LAP RECORDS -->
+    <section id="achievements" class="section-dark">
+        <div class="container">
+            <h2 class="section-title">LAP RECORDS</h2>
+            <div class="timeline-container">
+                <div class="timeline-track"></div>
+                
+                <div class="timeline-marker" data-year="2009" style="left: 10%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2009</span>
+                    <div class="timeline-card">
+                        <ul>
+                            <li>3rd best cost report</li>
+                            <li>4th best manufacturing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-marker" data-year="2011" style="left: 25%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2011</span>
+                    <div class="timeline-card green-accent">
+                        <ul>
+                            <li>Lightest dynamic vehicle</li>
+                            <li>GO GREEN Award</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-marker" data-year="2012" style="left: 40%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2012</span>
+                    <div class="timeline-card gold-pulse">
+                        <h4 class="card-highlight">OVERALL NATIONAL CHAMPIONS</h4>
+                        <ul>
+                            <li>2nd Safe Vehicle</li>
+                            <li>2nd Manoeuvrability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-marker" data-year="2015" style="left: 55%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2015</span>
+                    <div class="timeline-card green-accent">
+                        <ul>
+                            <li>1st Manoeuvrability</li>
+                            <li>GO GREEN Award</li>
+                            <li>1st Overall Dynamics</li>
+                            <li>3rd cost report</li>
+                            <li>9th overall BAJA SAE India</li>
+                            <li>30th Auburn International</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-marker" data-year="2016" style="left: 70%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2016</span>
+                    <div class="timeline-card">
+                        <ul>
+                            <li>3rd BAJA SAE Overall</li>
+                            <li>5th Design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-marker" data-year="2017" style="left: 80%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2017</span>
+                    <div class="timeline-card">
+                        <ul>
+                            <li>Enduro Student India</li>
+                            <li>3rd cost and design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-marker" data-year="2019" style="left: 95%;">
+                    <div class="flag-icon"></div>
+                    <span class="year">2019</span>
+                    <div class="timeline-card green-accent">
+                        <h4 class="card-highlight">FMAE OVERALL CHAMPIONS</h4>
+                        <ul>
+                            <li>1st Design & CAE</li>
+                            <li>1st Acceleration</li>
+                            <li>1st Rock Climb</li>
+                            <li>1st Endurance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISION (Added implicitly from sections order in prompt) -->
+    <section id="vision" class="section-dark">
+         <div class="container text-center">
+            <h2 class="section-title">THE REBUILD</h2>
+            <p class="body-text large">Fresh rebuild, youth leadership. We seek partners who believe in the dirt.</p>
+         </div>
+    </section>
+
+    <!-- SPONSORSHIP: FUEL THE MACHINE -->
+    <section id="sponsorship" class="section-dark">
+        <div class="container">
+            <h2 class="section-title text-center" id="sponsor-title">YOUR BRAND. OUR DIRT. THEIR EYES.</h2>
+            <div class="sponsor-tiers">
+                <!-- DOMINAR -->
+                <div class="tier-card tier-dominar">
+                    <div class="tier-header">
+                        <h3>DOMINAR</h3>
+                        <span class="tier-price">₹1,50,000</span>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><span></span> Logo on car + T-shirt + banners + driver suit</li>
+                        <li><span></span> Social media post + exclusive collab reel</li>
+                        <li><span></span> Custom car colour scheme</li>
+                        <li><span></span> Maximum reach package</li>
+                    </ul>
+                </div>
+
+                <!-- THROTTLE -->
+                <div class="tier-card tier-throttle">
+                    <div class="tier-header">
+                        <h3>THROTTLE</h3>
+                        <span class="tier-price">₹75,000</span>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><span></span> Logo on car + T-shirt + banners</li>
+                        <li><span></span> Social post + collab reel</li>
+                        <li><span></span> Strong motorsport visibility</li>
+                    </ul>
+                </div>
+
+                <!-- VELOCITY -->
+                <div class="tier-card tier-velocity">
+                    <div class="tier-header">
+                        <h3>VELOCITY</h3>
+                        <span class="tier-price">₹50,000</span>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><span></span> Logo on car + T-shirt</li>
+                        <li><span></span> Social post</li>
+                        <li><span></span> No collab reel, no banner</li>
+                    </ul>
+                </div>
+
+                <!-- DRIFT -->
+                <div class="tier-card tier-drift">
+                    <div class="tier-header">
+                        <h3>DRIFT</h3>
+                        <span class="tier-price">₹30,000</span>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><span></span> Logo on car only</li>
+                        <li><span></span> Basic social shoutout</li>
+                        <li><span></span> Entry-level association</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPONSORS WALL: THOSE WHO FUELED US -->
+    <section id="sponsors-wall" class="section-dark pattern-bg">
+        <div class="container text-center">
+            <h2 class="section-title">THE ONES WHO BELIEVED</h2>
+            
+            <div class="current-sponsors">
+                <div class="sponsor-badge">ANSYS</div>
+                <div class="sponsor-badge">SolidWorks</div>
+                <div class="sponsor-badge">OnlyScrews</div>
+            </div>
+
+            <div class="previous-sponsors-marquee">
+                <div class="marquee-content">
+                    Bharat Petroleum &middot; Vega &middot; State Bank of Mysore &middot; Pankaj &middot; LPS &middot; ThinkDigital &middot; Continental &middot; Magod Laser &middot; Veedol &middot; IPETRONIK &middot; CQC Alumni &middot; Bellatrix Aerospace &middot; Delta Gear &middot; Aquila Mobitech &middot; ProCAE &middot; Lincoln Electric &middot; KKMSoft &middot; CADD Centre &middot; Levi's &middot; Scolarian Racing &middot;
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    Bharat Petroleum &middot; Vega &middot; State Bank of Mysore &middot; Pankaj &middot; LPS &middot; ThinkDigital &middot; Continental &middot; Magod Laser &middot; Veedol &middot; IPETRONIK &middot; CQC Alumni &middot; Bellatrix Aerospace &middot; Delta Gear &middot; Aquila Mobitech &middot; ProCAE &middot; Lincoln Electric &middot; KKMSoft &middot; CADD Centre &middot; Levi's &middot; Scolarian Racing &middot;
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT: JOIN THE PIT CREW -->
+    <section id="contact" class="section-dark">
+        <div class="container text-center">
+            <h2 class="section-title">READY TO FUEL THE MACHINE?</h2>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <h4>Y Harsha Vardan</h4>
+                    <p class="role">Captain</p>
+                    <p class="phone">+91 95001 35699</p>
+                    <a href="mailto:yhv2006@gmail.com" class="email">yhv2006@gmail.com</a>
+                </div>
+                <div class="contact-card">
+                    <h4>Adhree Pradeep Nair</h4>
+                    <p class="role">Secretary</p>
+                    <p class="phone">+91 9043137135</p>
+                    <a href="mailto:adhree@gmail.com" class="email">adhree@gmail.com</a>
+                </div>
+                <div class="contact-card">
+                    <h4>Shreyas B</h4>
+                    <p class="role">Corporate Director</p>
+                    <p class="phone">+91 8148117150</p>
+                    <a href="mailto:shreyas.baiju.2006@gmail.com" class="email">shreyas.baiju.2006@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <button id="sponsor-cta" class="primary-btn">
+                    <span class="btn-text">BECOME A SPONSOR &rarr;</span>
+                    <div class="tire-spin-loader"></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-dark">
+        <div class="footer-ticker">
+            <div class="ticker-content">
+                THE CONRODS &copy; 2025&ndash;26 &middot; SRM UNIVERSITY &middot; DIRT * GUTS * GLORY &middot; THE CONRODS &copy; 2025&ndash;26 &middot; SRM UNIVERSITY &middot; DIRT * GUTS * GLORY &middot;
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
