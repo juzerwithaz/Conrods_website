@@ -61,14 +61,11 @@ gsap.to('.hero', {
 
 // ===== CAR LANDING ANIMATION =====
 if (window.innerWidth > 768) {
-
-  // Car starts on the RIGHT side of hero, nose already tilted down
-  // matching the angle in photo1_edited.jpg
   gsap.set('#car-img', {
     x: window.innerWidth * 0.2,
     y: -(window.innerHeight * 0.55),
     rotation: -8,
-    scale: 0.72,
+    scale: 0.72
   });
 
   gsap.set('.about-right', { opacity: 0, y: 50 });
@@ -82,7 +79,6 @@ if (window.innerWidth > 768) {
       scrub: 2,
     }
   })
-  // Car descends diagonally — right side of hero → left side of about section
   .to('#car-img', {
     x: -(window.innerWidth * 0.2),
     y: window.innerHeight * 0.08,
@@ -91,29 +87,11 @@ if (window.innerWidth > 768) {
     ease: 'power2.inOut',
     duration: 0.72
   }, 0)
-
-  // Ground line shoots in left to right on landing
-  .to('.ground-line', {
-    opacity: 1,
-    scaleX: 1,
-    transformOrigin: 'left center',
-    ease: 'power3.out',
-    duration: 0.06
-  }, 0.68)
-
-  // Ground line flash — landing impact
+  .to('.ground-line', { opacity: 1, scaleX: 1, transformOrigin: 'left center', ease: 'power3.out', duration: 0.06 }, 0.68)
   .to('.ground-line', { opacity: 0.2, duration: 0.03 }, 0.74)
   .to('.ground-line', { opacity: 0.9, duration: 0.03 }, 0.77)
   .to('.ground-line', { opacity: 0.5, duration: 0.04 }, 0.80)
-
-  // About text reveals after car lands
-  .to('.about-right', {
-    opacity: 1,
-    y: 0,
-    ease: 'power3.out',
-    duration: 0.28
-  }, 0.78);
-
+  .to('.about-right', { opacity: 1, y: 0, ease: 'power3.out', duration: 0.28 }, 0.78);
 }
 
 // ===== SECTION REVEALS =====
