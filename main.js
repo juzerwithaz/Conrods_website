@@ -1,24 +1,12 @@
-// ===== LENIS SMOOTH SCROLL =====
-const lenis = new Lenis({
-  duration: 1.4,
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-// ===== GSAP + SCROLLTRIGGER =====
+// ===== GSAP + LENIS SMOOTH SCROLL =====
 gsap.registerPlugin(ScrollTrigger);
 
-// Connect Lenis to GSAP
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
 gsap.ticker.add(time => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
-
-// Update ScrollTrigger on Lenis scroll
 lenis.on('scroll', ScrollTrigger.update);
 
 // ===== CUSTOM CURSOR =====
@@ -72,64 +60,60 @@ gsap.to('.hero', {
 });
 
 // ===== CAR LANDING ANIMATION =====
-const isMobile = window.innerWidth < 768;
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (window.innerWidth > 768) {
 
-if (!isMobile && !prefersReduced) {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-
-  // Start: right side of hero, tilted, in flight
-  gsap.set('#car-container', {
-    x: vw * 0.48,
-    y: vh * 0.18,
-    rotation: -6,
-    scale: 0.88
+  // Car starts on the RIGHT side of hero, nose already tilted down
+  // matching the angle in photo1_edited.jpg
+  gsap.set('#car-img', {
+    x: window.innerWidth * 0.2,
+    y: -(window.innerHeight * 0.55),
+    rotation: -8,
+    scale: 0.72,
   });
 
-  // End: left side of about section, landed level
-  // Target: horizontally centered in left half, vertically centered in about section
-  const tl = gsap.timeline({
+  gsap.set('.about-right', { opacity: 0, y: 50 });
+  gsap.set('.ground-line', { opacity: 0, scaleX: 0 });
+
+  gsap.timeline({
     scrollTrigger: {
-      trigger: '#hero',
+      trigger: '.transition-zone',
       start: 'top top',
-      end: 'bottom top',
+      end: 'bottom bottom',
       scrub: 2,
-      onLeave: () => {
-        // Car has landed — reveal the about text
-        gsap.to('.about-right', {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power2.out'
-        });
-        gsap.to('.ground-line', {
-          opacity: 1, duration: 0.1,
-          yoyo: true, repeat: 3
-        });
-      }
     }
-  });
+  })
+  // Car descends diagonally — right side of hero → left side of about section
+  .to('#car-img', {
+    x: -(window.innerWidth * 0.2),
+    y: window.innerHeight * 0.08,
+    rotation: 0,
+    scale: 1,
+    ease: 'power2.inOut',
+    duration: 0.72
+  }, 0)
 
-  tl.to('#car-container', {
-    x: vw * 0.04,           // lands on left side
-    y: vh * 0.28,           // vertically centered
-    rotation: 0,            // levels out
-    scale: 1.0,             // full size
-    ease: 'power2.inOut'
-  });
+  // Ground line shoots in left to right on landing
+  .to('.ground-line', {
+    opacity: 1,
+    scaleX: 1,
+    transformOrigin: 'left center',
+    ease: 'power3.out',
+    duration: 0.06
+  }, 0.68)
 
-  // Set initial about-right state
-  gsap.set('.about-right', { opacity: 0, y: 30 });
+  // Ground line flash — landing impact
+  .to('.ground-line', { opacity: 0.2, duration: 0.03 }, 0.74)
+  .to('.ground-line', { opacity: 0.9, duration: 0.03 }, 0.77)
+  .to('.ground-line', { opacity: 0.5, duration: 0.04 }, 0.80)
 
-  // Recalculate on resize
-  window.addEventListener('resize', () => {
-    ScrollTrigger.refresh();
-  });
-} else if (isMobile) {
-  ScrollTrigger.getAll().forEach(t => {
-    if (t.trigger && t.trigger.classList.contains('car-section')) t.kill();
-  });
+  // About text reveals after car lands
+  .to('.about-right', {
+    opacity: 1,
+    y: 0,
+    ease: 'power3.out',
+    duration: 0.28
+  }, 0.78);
+
 }
 
 // ===== SECTION REVEALS =====

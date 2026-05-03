@@ -16,11 +16,7 @@
 <div id="cursor"></div>
 <div id="cursor-dot"></div>
 
-<!-- Car is outside all sections, fixed positioned -->
-<div id="car-container">
-  <img id="car-img" src="./images/photo_2.png" alt="The Conrods ATV">
-  <div class="ground-line"></div>
-</div>
+
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -49,17 +45,22 @@
   </div>
 </section>
 
-<!-- About Section — this is where car lands -->
-<section class="about-section" id="about">
-  <div class="about-left">
-    <!-- empty — car lands here visually via fixed positioning -->
+<!-- Transition Zone: Sticky Car + About Section -->
+<div class="transition-zone" id="transition-zone">
+  <div class="car-sticky-wrap">
+    <img id="car-img" src="./images/photo2_edited.png" alt="The Conrods ATV">
+    <div class="ground-line"></div>
   </div>
-  <div class="about-right">
-    <span class="section-label">THE TEAM</span>
-    <h2>A LEGACY BUILT ON DIRT</h2>
-    <p>The Conrods is one of the most well-established teams at SRM University, renowned for its strong presence and consistent performance in racing events over the years. With a legacy built on dedication and innovation, the team has earned a significant name in the BAJA community. Now, with a fresh start after four years, the team is focused on rebuilding its vehicle from the ground up, aiming to come back stronger and push the limits of engineering and performance.</p>
+
+  <div class="about-content">
+    <div class="about-left"></div>
+    <div class="about-right">
+      <span class="about-label">THE TEAM</span>
+      <h2>A LEGACY BUILT<br>ON DIRT</h2>
+      <p>The Conrods is one of the most well-established teams at SRM University, renowned for its strong presence and consistent performance in racing events over the years. With a legacy built on dedication and innovation, the team has earned a significant name in the BAJA community. Now, with a fresh start after four years, the team is focused on rebuilding its vehicle from the ground up, aiming to come back stronger and push the limits of engineering and performance.</p>
+    </div>
   </div>
-</section>
+</div>
 
 <!-- ACHIEVEMENTS -->
 <section class="achievements-section" id="achievements">
