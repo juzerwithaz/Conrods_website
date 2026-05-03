@@ -1,14 +1,3 @@
-// ===== GSAP + LENIS SMOOTH SCROLL =====
-gsap.registerPlugin(ScrollTrigger);
-
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-});
-gsap.ticker.add(time => lenis.raf(time * 1000));
-gsap.ticker.lagSmoothing(0);
-lenis.on('scroll', ScrollTrigger.update);
-
 // ===== CUSTOM CURSOR =====
 const cursor = document.getElementById('cursor');
 const cursorDot = document.getElementById('cursor-dot');
@@ -58,41 +47,6 @@ gsap.to('.hero', {
     scrub: true
   }
 });
-
-// ===== CAR LANDING ANIMATION =====
-if (window.innerWidth > 768) {
-  gsap.set('#car-img', {
-    x: window.innerWidth * 0.2,
-    y: -(window.innerHeight * 0.55),
-    rotation: -8,
-    scale: 0.72
-  });
-
-  gsap.set('.about-right', { opacity: 0, y: 50 });
-  gsap.set('.ground-line', { opacity: 0, scaleX: 0 });
-
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '.transition-zone',
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 2,
-    }
-  })
-  .to('#car-img', {
-    x: -(window.innerWidth * 0.2),
-    y: window.innerHeight * 0.08,
-    rotation: 0,
-    scale: 1,
-    ease: 'power2.inOut',
-    duration: 0.72
-  }, 0)
-  .to('.ground-line', { opacity: 1, scaleX: 1, transformOrigin: 'left center', ease: 'power3.out', duration: 0.06 }, 0.68)
-  .to('.ground-line', { opacity: 0.2, duration: 0.03 }, 0.74)
-  .to('.ground-line', { opacity: 0.9, duration: 0.03 }, 0.77)
-  .to('.ground-line', { opacity: 0.5, duration: 0.04 }, 0.80)
-  .to('.about-right', { opacity: 1, y: 0, ease: 'power3.out', duration: 0.28 }, 0.78);
-}
 
 // ===== SECTION REVEALS =====
 // About cards
