@@ -46,7 +46,7 @@
 </section>
 
 <div style="position:relative; height:280vh; background:#080808;">
-  <div style="position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+  <div style="position:sticky; top:0; height:100vh; overflow:visible; display:flex; align-items:center; justify-content:center; z-index:10; pointer-events:none;">
     <img id="car-img" src="./images/photo2_edited-removebg-preview.png" style="width:500px; max-width:48vw; will-change:transform; transform-origin:center bottom; filter:drop-shadow(0 40px 80px rgba(232,78,15,0.3));">
     <div id="ground-line" style="position:absolute; bottom:22vh; left:8%; width:84%; height:1px; background:linear-gradient(to right,transparent,#E84E0F 30%,#E84E0F 70%,transparent); opacity:0; transform:scaleX(0); transform-origin:left center;"></div>
   </div>
@@ -223,7 +223,7 @@ const transitionZone = carImg.closest('div[style*="280vh"]');
 const heroSection = document.querySelector('.hero') || document.querySelector('section');
 const heroRect = heroSection.getBoundingClientRect();
 
-// Car starts matching its position in the hero background image
+// Car starts exactly matching its position in the hero background image
 gsap.set(carImg, {
   x: window.innerWidth * 0.19,
   y: -(window.innerHeight * 0.52),
@@ -236,25 +236,27 @@ gsap.set(aboutText, { opacity: 0, y: 50 });
 
 gsap.timeline({
   scrollTrigger: {
-    trigger: transitionZone,
+    trigger: '#hero',
     start: 'top top',
-    end: 'bottom bottom',
+    end: '+=280%', // Animates over 280vh of scrolling
     scrub: 2
   }
 })
+// As the user scrolls the first 112vh (0.4 * 280), the car moves down to the center
 .to(carImg, {
   x: -(window.innerWidth * 0.19),
   y: window.innerHeight * 0.06,
   rotation: 0,
   scale: 1,
   ease: 'power2.inOut',
-  duration: 0.72
+  duration: 0.4
 }, 0)
-.to(groundLine, { opacity: 1, scaleX: 1, ease: 'power3.out', duration: 0.06 }, 0.68)
-.to(groundLine, { opacity: 0.2, duration: 0.03 }, 0.74)
-.to(groundLine, { opacity: 0.9, duration: 0.03 }, 0.77)
-.to(groundLine, { opacity: 0.5, duration: 0.04 }, 0.80)
-.to(aboutText, { opacity: 1, y: 0, ease: 'power3.out', duration: 0.28 }, 0.78);
+// Then the ground line and about text animate in
+.to(groundLine, { opacity: 1, scaleX: 1, ease: 'power3.out', duration: 0.06 }, 0.5)
+.to(groundLine, { opacity: 0.2, duration: 0.03 }, 0.56)
+.to(groundLine, { opacity: 0.9, duration: 0.03 }, 0.59)
+.to(groundLine, { opacity: 0.5, duration: 0.04 }, 0.62)
+.to(aboutText, { opacity: 1, y: 0, ease: 'power3.out', pointerEvents: 'auto', duration: 0.28 }, 0.6);
 </script>
 </body>
 </html>
