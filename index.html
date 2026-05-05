@@ -53,32 +53,33 @@
     </div>
   </section>
 
-  <div style="position:relative; height:200vh; background:#080808;">
+  <div id="car-trigger" style="position:relative; height:240vh; background:#080808;">
     <div
       style="position:sticky; top:0; height:100vh; overflow:visible; display:flex; align-items:center; justify-content:center; z-index:10; pointer-events:none;">
       <img id="car-img" src="./images/Adobe%20Express%20-%20file%20(2).png"
-        style="width:750px; max-width:65vw; will-change:transform; transform-origin:center bottom; filter:drop-shadow(0 40px 80px rgba(232,78,15,0.3));">
+        style="width:750px; max-width:70vw; will-change:transform; transform-origin:center bottom; filter:drop-shadow(0 40px 80px rgba(232,78,15,0.3));">
     </div>
     <div style="position:absolute; bottom:0; left:0; width:100%; height:100vh;">
       <div id="ground-line"
-        style="position:absolute; bottom:15vh; left:8%; width:84%; height:1px; background:linear-gradient(to right,transparent,#E84E0F 30%,#E84E0F 70%,transparent);">
+        style="position:absolute; bottom:18vh; left:5%; width:90%; height:1px; background:linear-gradient(to right,transparent,#E84E0F 30%,#E84E0F 70%,transparent); opacity:0.8;">
       </div>
       <div
-        style="display:grid; grid-template-columns:1fr 1fr; align-items:center; height:100%; padding:0 6vw; gap:60px;">
+        style="display:grid; grid-template-columns:1.2fr 1fr; align-items:center; height:100%; padding:0 6vw; gap:40px;">
         <div></div>
-        <div id="about-text" style="opacity:0; transform:translateY(50px);">
-        <span
-          style="display:block; font-family:Inter,sans-serif; font-size:11px; letter-spacing:0.3em; color:#E84E0F; text-transform:uppercase; margin-bottom:20px;">THE
-          TEAM</span>
-        <h2
-          style="font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,6vw,100px); color:#F0EDE8; line-height:0.95; margin-bottom:28px;">
-          ABOUT<br>THE CONRODS</h2>
-        <p style="font-family:Inter,sans-serif; font-size:15px; line-height:1.9; color:#8A8880; max-width:460px;">The
-          Conrods is one of the most well-established teams at SRM University, renowned for its strong presence and
-          consistent performance in racing events over the years. With a legacy built on dedication and innovation, the
-          team has earned a significant name in the BAJA community. Now, with a fresh start after four years, the team
-          is focused on rebuilding its vehicle from the ground up, aiming to come back stronger and push the limits of
-          engineering and performance.</p>
+        <div id="about-text" style="opacity:0; transform:translateY(50px); pointer-events:all;">
+          <span
+            style="display:block; font-family:Inter,sans-serif; font-size:11px; letter-spacing:0.3em; color:#E84E0F; text-transform:uppercase; margin-bottom:20px;">THE
+            TEAM</span>
+          <h2
+            style="font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,6vw,100px); color:#F0EDE8; line-height:0.95; margin-bottom:28px;">
+            ABOUT<br>THE CONRODS</h2>
+          <p style="font-family:Inter,sans-serif; font-size:15px; line-height:1.9; color:#8A8880; max-width:460px;">The
+            Conrods is one of the most well-established teams at SRM University, renowned for its strong presence and
+            consistent performance in racing events over the years. With a legacy built on dedication and innovation, the
+            team has earned a significant name in the BAJA community. Now, with a fresh start after four years, the team
+            is focused on rebuilding its vehicle from the ground up, aiming to come back stronger and push the limits of
+            engineering and performance.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -246,15 +247,7 @@
     lenis.on('scroll', ScrollTrigger.update);
 
     const carImg = document.getElementById('car-img');
-    const groundLine = document.getElementById('ground-line');
     const aboutText = document.getElementById('about-text');
-    const transitionZone = carImg.closest('div[style*="200vh"]');
-
-    // Get the car's natural position on the hero background
-    // The car in photo1_edited.jpg sits on the right side mid-frame
-    // We position the cutout to match that exact spot then animate down
-    const heroSection = document.querySelector('.hero') || document.querySelector('section');
-    const heroRect = heroSection.getBoundingClientRect();
 
     // Car starts exactly matching its position in the hero background image
     gsap.set(carImg, {
@@ -264,27 +257,27 @@
       scale: 0.9 // Restored initial size
     });
 
-    gsap.set(aboutText, { opacity: 0, y: 50 });
+    gsap.set(aboutText, { opacity: 0, y: 40 });
 
     gsap.timeline({
       scrollTrigger: {
-        trigger: '#hero',
+        trigger: '#car-trigger',
         start: 'top top',
-        end: '+=200%', // Reduced scroll distance so text appears faster
-        scrub: 2
+        end: 'bottom bottom',
+        scrub: 1.5
       }
     })
-      // As the user scrolls, the car moves down to the center
+      // As the user scrolls, the car moves down to perfectly align with the ground line
       .to(carImg, {
-        x: -(window.innerWidth * 0.35), // move slightly more left to clear text for larger car
-        y: -(window.innerHeight * 0.08), // move up so wheels sit perfectly on the line
+        x: -(window.innerWidth * 0.32), // Clear the text
+        y: (window.innerHeight * 0.16), // Land exactly on the 18vh line
         rotation: 0,
         scale: 1.0, // Restored final size
         ease: 'power2.inOut',
-        duration: 0.4
+        duration: 1
       }, 0)
       // text animates in
-      .to(aboutText, { opacity: 1, y: 0, ease: 'power3.out', pointerEvents: 'auto', duration: 0.35 }, 0.5);
+      .to(aboutText, { opacity: 1, y: 0, ease: 'power3.out', duration: 0.4 }, 0.65);
   </script>
 </body>
 
