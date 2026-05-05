@@ -26,8 +26,8 @@
   <!-- HERO -->
   <section class="hero" id="hero">
     <nav>
-      <span class="nav-text" style="display:flex; align-items:center; gap:12px;">
-        <img src="./images/logo.png" alt="Logo" style="height:32px; width:auto;">
+      <span class="nav-text" style="display:flex; align-items:center; gap:16px;">
+        <img src="./images/logo.png" alt="Logo" style="height:52px; width:auto;">
         THE CONRODS
       </span>
       <ul>
@@ -57,15 +57,16 @@
     <div
       style="position:sticky; top:0; height:100vh; overflow:visible; display:flex; align-items:center; justify-content:center; z-index:10; pointer-events:none;">
       <img id="car-img" src="./images/Adobe%20Express%20-%20file%20(2).png"
-        style="width:680px; max-width:55vw; will-change:transform; transform-origin:center bottom; filter:drop-shadow(0 40px 80px rgba(232,78,15,0.3));">
-      <div id="ground-line"
-        style="position:absolute; bottom:15vh; left:8%; width:84%; height:1px; background:linear-gradient(to right,transparent,#E84E0F 30%,#E84E0F 70%,transparent); opacity:0; transform:scaleX(0); transform-origin:left center;">
-      </div>
+        style="width:750px; max-width:65vw; will-change:transform; transform-origin:center bottom; filter:drop-shadow(0 40px 80px rgba(232,78,15,0.3));">
     </div>
-    <div
-      style="position:absolute; bottom:0; left:0; width:100%; height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:0 6vw; gap:60px;">
-      <div></div>
-      <div id="about-text" style="opacity:0; transform:translateY(50px);">
+    <div style="position:absolute; bottom:0; left:0; width:100%; height:100vh;">
+      <div id="ground-line"
+        style="position:absolute; bottom:15vh; left:8%; width:84%; height:1px; background:linear-gradient(to right,transparent,#E84E0F 30%,#E84E0F 70%,transparent);">
+      </div>
+      <div
+        style="display:grid; grid-template-columns:1fr 1fr; align-items:center; height:100%; padding:0 6vw; gap:60px;">
+        <div></div>
+        <div id="about-text" style="opacity:0; transform:translateY(50px);">
         <span
           style="display:block; font-family:Inter,sans-serif; font-size:11px; letter-spacing:0.3em; color:#E84E0F; text-transform:uppercase; margin-bottom:20px;">THE
           TEAM</span>
@@ -224,7 +225,7 @@
       </div>
     </div>
     <div style="display:flex; justify-content:center; margin-bottom: 40px;">
-      <img src="./images/logo.png" alt="The Conrods Logo" style="height:60px; opacity:0.8;">
+      <img src="./images/logo.png" alt="The Conrods Logo" style="height:100px; opacity:0.8;">
     </div>
     <div class="footer-bottom">
       <div class="footer-tagline">"With you on board, every off-road is our runway."</div>
@@ -260,10 +261,9 @@
       x: window.innerWidth * 0.15,
       y: -(window.innerHeight * 0.95), // Bring it higher up
       rotation: -6,
-      scale: 0.75 // Decrease initial size further
+      scale: 0.9 // Restored initial size
     });
 
-    gsap.set(groundLine, { opacity: 0, scaleX: 0 });
     gsap.set(aboutText, { opacity: 0, y: 50 });
 
     gsap.timeline({
@@ -276,18 +276,14 @@
     })
       // As the user scrolls, the car moves down to the center
       .to(carImg, {
-        x: -(window.innerWidth * 0.32), // move further left to clear text completely
+        x: -(window.innerWidth * 0.35), // move slightly more left to clear text for larger car
         y: -(window.innerHeight * 0.08), // move up so wheels sit perfectly on the line
         rotation: 0,
-        scale: 0.85, // Reduce final size further
+        scale: 1.0, // Restored final size
         ease: 'power2.inOut',
         duration: 0.4
       }, 0)
-      // Then the ground line and about text animate in slightly earlier
-      .to(groundLine, { opacity: 1, scaleX: 1, ease: 'power3.out', duration: 0.06 }, 0.45)
-      .to(groundLine, { opacity: 0.2, duration: 0.03 }, 0.51)
-      .to(groundLine, { opacity: 0.9, duration: 0.03 }, 0.54)
-      .to(groundLine, { opacity: 0.5, duration: 0.04 }, 0.57)
+      // text animates in
       .to(aboutText, { opacity: 1, y: 0, ease: 'power3.out', pointerEvents: 'auto', duration: 0.35 }, 0.5);
   </script>
 </body>
