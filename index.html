@@ -51,8 +51,9 @@
       <span>SCROLL TO EXPLORE</span>
       <div class="scroll-line"></div>
     </div>
-    <img id="car-img" src="./images/Adobe%20Express%20-%20file%20(2).png" style="position:absolute; bottom: -80px; right: 8vw; width: 600px; max-width: 50vw; z-index: 5; filter: drop-shadow(0 40px 80px rgba(232,78,15,0.3)); will-change: transform;">
   </section>
+
+  <img id="car-img" src="./images/car.png" style="position:absolute; top: 55vh; right: 8vw; width: 600px; max-width: 50vw; z-index: 10; filter: drop-shadow(0 40px 80px rgba(232,78,15,0.3)); will-change: transform;">
 
   <!-- ABOUT -->
   <section id="about" style="padding: 120px 6vw; background: #080808; position: relative; z-index: 2;">
@@ -230,6 +231,7 @@
 
     // Ensure we kill any old ScrollTriggers if they somehow existed
     ScrollTrigger.getById("hero-pin")?.kill();
+    ScrollTrigger.getById("car-pin")?.kill();
     ScrollTrigger.getById("car-descent")?.kill();
 
     function initScrollAnimations() {
@@ -244,6 +246,16 @@
         pin: true,
         pinSpacing: false,
         id: "hero-pin"
+      });
+
+      // Pin the car independently so it stays on top of #about
+      ScrollTrigger.create({
+        trigger: ".hero",
+        start: "top top",
+        end: "+=700",
+        pin: "#car-img",
+        pinSpacing: false,
+        id: "car-pin"
       });
 
       // Car descent — scrubbed to scroll
