@@ -51,22 +51,20 @@
       <span>SCROLL TO EXPLORE</span>
       <div class="scroll-line"></div>
     </div>
+    <img id="car-img" src="./images/Adobe%20Express%20-%20file%20(2).png" style="position:absolute; bottom: -80px; right: 8vw; width: 600px; max-width: 50vw; z-index: 5; filter: drop-shadow(0 40px 80px rgba(232,78,15,0.3)); will-change: transform;">
   </section>
 
-  <div style="position:relative; height:280vh; background:#080808;">
-    <div style="position:sticky; top:0; height:100vh; overflow:visible; display:flex; align-items:center; justify-content:center; z-index:10; pointer-events:none;">
-      <img id="car-img" src="./images/Adobe%20Express%20-%20file%20(2).png" style="width:500px; max-width:48vw; will-change:transform; transform-origin:center bottom; filter:drop-shadow(0 40px 80px rgba(232,78,15,0.3));">
-      <div id="ground-line" style="position:absolute; bottom:22vh; left:8%; width:84%; height:1px; background:linear-gradient(to right,transparent,#E84E0F 30%,#E84E0F 70%,transparent); opacity:0; transform:scaleX(0); transform-origin:left center;"></div>
-    </div>
-    <div style="position:absolute; bottom:0; left:0; width:100%; height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:0 6vw; gap:60px;">
+  <!-- ABOUT -->
+  <section id="about" style="padding: 120px 6vw; background: #080808; position: relative; z-index: 2;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:60px;">
       <div></div>
-      <div id="about-text" style="opacity:0; transform:translateY(50px);">
+      <div id="about-text">
         <span style="display:block; font-family:Inter,sans-serif; font-size:11px; letter-spacing:0.3em; color:#E84E0F; text-transform:uppercase; margin-bottom:20px;">THE TEAM</span>
         <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,6vw,100px); color:#F0EDE8; line-height:0.95; margin-bottom:28px;">A LEGACY BUILT<br>ON DIRT</h2>
         <p style="font-family:Inter,sans-serif; font-size:15px; line-height:1.9; color:#8A8880; max-width:460px;">The Conrods is one of the most well-established teams at SRM University, renowned for its strong presence and consistent performance in racing events over the years. With a legacy built on dedication and innovation, the team has earned a significant name in the BAJA community. Now, with a fresh start after four years, the team is focused on rebuilding its vehicle from the ground up, aiming to come back stronger and push the limits of engineering and performance.</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ACHIEVEMENTS -->
   <section class="achievements-section" id="achievements">
@@ -230,49 +228,95 @@
     gsap.ticker.lagSmoothing(0);
     lenis.on('scroll', ScrollTrigger.update);
 
-    const carImg = document.getElementById('car-img');
-    const groundLine = document.getElementById('ground-line');
-    const aboutText = document.getElementById('about-text');
-    const transitionZone = carImg.closest('div[style*="280vh"]');
+    // Ensure we kill any old ScrollTriggers if they somehow existed
+    ScrollTrigger.getById("hero-pin")?.kill();
+    ScrollTrigger.getById("car-descent")?.kill();
 
-    // Get the car's natural position on the hero background
-    // The car in photo1_edited.jpg sits on the right side mid-frame
-    // We position the cutout to match that exact spot then animate down
-    const heroSection = document.querySelector('.hero') || document.querySelector('section');
-    const heroRect = heroSection.getBoundingClientRect();
+    function initScrollAnimations() {
+      // About section entrance initial state
+      gsap.set('#about', { y: 80, opacity: 0 });
 
-    // Car starts matching its position in the hero background image
-    gsap.set(carImg, {
-      x: window.innerWidth * 0.19,
-      y: -(window.innerHeight * 0.52),
-      rotation: -6,
-      scale: 0.75
-    });
+      // Pin the hero section
+      ScrollTrigger.create({
+        trigger: ".hero",
+        start: "top top",
+        end: "+=700",
+        pin: true,
+        pinSpacing: false,
+        id: "hero-pin"
+      });
 
-    gsap.set(groundLine, { opacity: 0, scaleX: 0 });
-    gsap.set(aboutText, { opacity: 0, y: 50 });
+      // Car descent — scrubbed to scroll
+      gsap.to("#car-img", {
+        y: 300,
+        x: -30,
+        scale: 0.9,
+        opacity: 0.8,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "+=700",
+          scrub: 1.5,
+          id: "car-descent"
+        }
+      });
 
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: transitionZone,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 2
-      }
-    })
-    .to(carImg, {
-      x: -(window.innerWidth * 0.19),
-      y: window.innerHeight * 0.06,
-      rotation: 0,
-      scale: 1,
-      ease: 'power2.inOut',
-      duration: 0.72
-    }, 0)
-    .to(groundLine, { opacity: 1, scaleX: 1, ease: 'power3.out', duration: 0.06 }, 0.68)
-    .to(groundLine, { opacity: 0.2, duration: 0.03 }, 0.74)
-    .to(groundLine, { opacity: 0.9, duration: 0.03 }, 0.77)
-    .to(groundLine, { opacity: 0.5, duration: 0.04 }, 0.80)
-    .to(aboutText, { opacity: 1, y: 0, ease: 'power3.out', duration: 0.28 }, 0.78);
+      // Headline exit
+      gsap.to(".hero-headline", {
+        y: -50,
+        opacity: 0,
+        ease: "power2.in",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "+=420",
+          scrub: 1.5
+        }
+      });
+
+      // Subtext exit
+      gsap.to(".hero-sub", {
+        y: -50,
+        opacity: 0,
+        ease: "power2.in",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "+=350",
+          scrub: 1.5
+        }
+      });
+
+      // Scroll indicator fade
+      gsap.to(".scroll-cta", {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "+=140",
+          scrub: 1
+        }
+      });
+
+      // About section entrance
+      gsap.to("#about", {
+        y: 0,
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top 95%",
+          end: "top 60%",
+          scrub: 1
+        }
+      });
+
+      ScrollTrigger.refresh();
+    }
+
+    // Execute immediately after a small tick
+    setTimeout(initScrollAnimations, 50);
   </script>
 </body>
 
